@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#667eea" />
+    <meta
+      name="description"
+      content="MyCloudProfile - Create your unique profile in the cloud! Design, customize, and share your creative identity. Perfect for kids, creators, and anyone who loves to express their creativity."
+    />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="MyCloudProfile - Creative Profile Builder" />
+    <meta property="og:description" content="Create your unique profile in the cloud! Design, customize, and share your creative identity." />
+    <meta property="og:image" content="%PUBLIC_URL%/social-preview.png" />
+    <meta property="og:url" content="https://mycloudprofile-dev.web.app" />
+    <meta property="og:type" content="website" />
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="MyCloudProfile - Creative Profile Builder" />
+    <meta name="twitter:description" content="Create your unique profile in the cloud! Design, customize, and share your creative identity." />
+    <meta name="twitter:image" content="%PUBLIC_URL%/social-preview.png" />
+    
+    <title>MyCloudProfile - Creative Profile Builder</title>
+    
+    <!-- Preconnect to Firebase and other external services -->
+    <link rel="preconnect" href="https://firebaseapp.com">
+    <link rel="preconnect" href="https://googleapis.com">
+    
+    <style>
+      /* Loading screen styles */
+      .initial-loading {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        z-index: 9999;
+      }
+      
+      .loading-emoji {
+        font-size: 4rem;
+        animation: spin 2s linear infinite;
+        margin-bottom: 1rem;
+      }
+      
+      @keyframes spin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+      }
+      
+      .loading-text {
+        font-size: 1.2rem;
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    
+    <!-- Initial loading screen -->
+    <div id="initial-loading" class="initial-loading">
+      <div class="loading-emoji">🌟</div>
+      <p class="loading-text">Loading MyCloudProfile...</p>
+    </div>
+    
+    <div id="root"></div>
+    
+    <script>
+      // Hide loading screen when React app loads
+      window.addEventListener('load', function() {
+        setTimeout(function() {
+          const loadingScreen = document.getElementById('initial-loading');
+          if (loadingScreen) {
+            loadingScreen.style.opacity = '0';
+            loadingScreen.style.transition = 'opacity 0.5s ease';
+            setTimeout(function() {
+              loadingScreen.remove();
+            }, 500);
+          }
+        }, 1000);
+      });
+    </script>
+  </body>
+</html>

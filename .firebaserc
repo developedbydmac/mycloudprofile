@@ -1,0 +1,15 @@
+{
+  "projects": {
+    "default": "mycloudprofile-dev"
+  },
+  "targets": {
+    "mycloudprofile-dev": {
+      "hosting": {
+        "mycloudprofile": [
+          "mycloudprofile-dev"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}
