@@ -97,6 +97,147 @@
   transform: translateY(-2px);
 }
 
+.demo-button {
+  background: linear-gradient(45deg, #667eea, #764ba2);
+  color: white;
+}
+
+.demo-button:hover {
+  background: linear-gradient(45deg, #5a67d8, #6b46c1);
+  transform: translateY(-2px);
+}
+
+.divider {
+  text-align: center;
+  margin: 20px 0;
+  position: relative;
+}
+
+.divider:before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: #ddd;
+}
+
+.divider span {
+  background: white;
+  padding: 0 15px;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+/* Demo Container Styles */
+.demo-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  flex-direction: column;
+}
+
+.demo-header {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.back-to-auth-btn {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 10px 20px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.back-to-auth-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+.demo-header h2 {
+  color: white;
+  margin: 0;
+  font-size: 1.5rem;
+  text-align: center;
+  flex: 1;
+}
+
+.demo-navigation {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.demo-nav-btn {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.demo-nav-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-1px);
+}
+
+.demo-counter {
+  color: white;
+  font-weight: 600;
+  font-size: 0.9rem;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 5px 12px;
+  border-radius: 15px;
+}
+
+.demo-footer {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 30px 20px;
+  text-align: center;
+  margin-top: auto;
+}
+
+.demo-footer p {
+  color: white;
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+}
+
+.cta-button {
+  background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 30px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.cta-button:hover {
+  background: linear-gradient(45deg, #ee5a24, #c44569);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(238, 90, 36, 0.4);
+}
+
 .button-icon {
   font-size: 1.2rem;
 }
@@ -124,5 +265,29 @@
   
   .auth-features {
     grid-template-columns: 1fr;
+  }
+
+  .demo-header {
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+  }
+
+  .demo-navigation {
+    justify-content: center;
+  }
+
+  .demo-header h2 {
+    font-size: 1.3rem;
+  }
+
+  .demo-nav-btn {
+    padding: 6px 12px;
+    font-size: 0.9rem;
+  }
+
+  .cta-button {
+    padding: 12px 25px;
+    font-size: 1rem;
   }
 }
