@@ -1,15 +1,16 @@
 .profile-preview {
   position: relative;
   padding: 20px;
-  min-height: 100vh;
+  min-height: 100%;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
+  overflow: auto;
 }
 
 .profile-container {
-  max-width: 600px;
+  max-width: 900px;
   width: 100%;
   text-align: center;
   padding: 40px;
@@ -17,6 +18,7 @@
   position: relative;
   z-index: 10;
   backdrop-filter: blur(10px);
+  margin: 0 auto;
 }
 
 .back-button {
@@ -244,5 +246,289 @@
   .action-button {
     width: 200px;
     justify-content: center;
+  }
+}
+
+/* MySpace Theme Styles */
+.myspace-layout {
+  background: #000000;
+  color: #ffffff;
+  width: 100%;
+  max-width: 100%;
+  min-height: 100%;
+  height: 100%;
+  font-family: Arial, sans-serif;
+  text-align: left;
+  border: 2px solid #ff6600;
+  border-radius: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  background-image: 
+    radial-gradient(circle at 20% 50%, rgba(255, 102, 0, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 102, 0, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 40% 80%, rgba(255, 102, 0, 0.1) 0%, transparent 50%);
+}
+
+.myspace-header {
+  background: linear-gradient(135deg, #1a1a1a, #000000);
+  border-bottom: 2px solid #ff6600;
+  padding: 20px;
+}
+
+.profile-main-info {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.profile-image {
+  flex-shrink: 0;
+  border: 3px solid #ff6600;
+  border-radius: 5px;
+  padding: 10px;
+  background: linear-gradient(45deg, #333, #000);
+  box-shadow: 0 0 15px rgba(255, 102, 0, 0.5);
+}
+
+.myspace-name {
+  color: #ff6600;
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin: 0 0 10px 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  font-style: italic;
+}
+
+.profile-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.stat-label {
+  color: #ff6600;
+  font-weight: bold;
+  min-width: 80px;
+}
+
+.stat-value {
+  color: #ffffff;
+  font-style: italic;
+}
+
+.myspace-content {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+  padding: 20px;
+  flex: 1;
+  overflow: auto;
+}
+
+.myspace-left-column,
+.myspace-right-column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.myspace-section {
+  background: linear-gradient(135deg, #1a1a1a, #000000);
+  border: 2px solid #ff6600;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+.section-title {
+  background: linear-gradient(135deg, #ff6600, #cc5200);
+  color: #000000;
+  font-weight: bold;
+  font-size: 1.1rem;
+  padding: 10px 15px;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.3);
+}
+
+.section-content {
+  padding: 15px;
+  color: #ffffff;
+  line-height: 1.5;
+}
+
+.myspace-music-btn {
+  background: linear-gradient(45deg, #ff6600, #cc5200);
+  color: #000000;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 3px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.myspace-music-btn:hover {
+  background: linear-gradient(45deg, #cc5200, #ff6600);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(255, 102, 0, 0.4);
+}
+
+/* Top 8 Friends Styles */
+.top-friends-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  padding: 10px;
+}
+
+.friend-card {
+  background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+  border: 1px solid #ff6600;
+  border-radius: 5px;
+  padding: 12px;
+  text-align: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.friend-card:hover {
+  background: linear-gradient(135deg, #3a3a3a, #2a2a2a);
+  border-color: #ffaa55;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(255, 102, 0, 0.3);
+}
+
+.friend-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 102, 0, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.friend-card:hover::before {
+  left: 100%;
+}
+
+.friend-avatar {
+  font-size: 2rem;
+  margin-bottom: 8px;
+  filter: drop-shadow(0 0 5px rgba(255, 102, 0, 0.5));
+}
+
+.friend-name {
+  color: #ff6600;
+  font-weight: bold;
+  font-size: 0.9rem;
+  margin-bottom: 5px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+.friend-status {
+  color: #cccccc;
+  font-size: 0.75rem;
+  font-style: italic;
+  line-height: 1.2;
+}
+
+/* MySpace Decorative Elements */
+.myspace-decorations {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.glitter {
+  position: absolute;
+  font-size: 1.5rem;
+  animation: glitter-sparkle 2s ease-in-out infinite;
+  filter: drop-shadow(0 0 5px rgba(255, 102, 0, 0.8));
+}
+
+@keyframes glitter-sparkle {
+  0%, 100% { 
+    opacity: 0.6; 
+    transform: scale(1) rotate(0deg); 
+  }
+  50% { 
+    opacity: 1; 
+    transform: scale(1.3) rotate(180deg);
+    filter: drop-shadow(0 0 10px rgba(255, 102, 0, 1));
+  }
+}
+
+/* Responsive MySpace Layout */
+@media (max-width: 768px) {
+  .myspace-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .profile-main-info {
+    flex-direction: column;
+    text-align: center;
+    gap: 15px;
+  }
+  
+  .myspace-name {
+    font-size: 2rem;
+  }
+  
+  .top-friends-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  
+  .friend-card {
+    padding: 8px;
+  }
+  
+  .friend-avatar {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .myspace-layout {
+    max-width: 100%;
+    margin: 10px;
+  }
+  
+  .myspace-header {
+    padding: 15px;
+  }
+  
+  .myspace-content {
+    padding: 15px;
+    gap: 15px;
+  }
+  
+  .profile-stats {
+    font-size: 0.9rem;
+  }
+  
+  .top-friends-grid {
+    grid-template-columns: 1fr 1fr;
   }
 }

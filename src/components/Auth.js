@@ -1,63 +1,57 @@
 import React, { useState } from 'react';
-import { signInWithGoogle, signInWithGithub } from '../services/auth';
+import { signInWithGoogle, signInWithGitHub, signOut, auth } from '../firebase/firebase';
 import ProfilePreview from './ProfilePreview';
-import { getDefaultProfile } from '../services/profileService';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import './Auth.css';
 
 const Auth = () => {
+  const [user, loading] = useAuthState(auth);
   const [showDemo, setShowDemo] = useState(false);
   const [currentDemoIndex, setCurrentDemoIndex] = useState(0);
 
-  // Sample demo profiles for each theme
   const demoProfiles = [
     {
-      ...getDefaultProfile(),
-      name: "Sarah's Space ♪",
-      avatar: "�",
-      bio: "♫ Music is my life ♫ Dance like nobody's watching ♫ Living for the weekend! Thanks for visiting my space! xoxo",
+      name: "Alex 💫",
+      avatar: "🎸",
+      bio: "Music is my life! Check out my latest tracks and let's jam together! Currently working on my debut album. 🎵✨",
       theme: "MySpace Dark",
-      backgroundColor: "#000000",
       textColor: "#ffffff",
-      fontSize: "16",
-      fontFamily: "Arial, sans-serif",
-      musicLink: "https://open.spotify.com/playlist/example",
+      fontFamily: "Arial",
+      fontSize: 16,
+      musicLink: "https://spotify.com",
+      mood: "🎵 rockin' out",
+      location: "Nashville, TN",
+      lastLogin: "2 mins ago",
       topFriends: [
-        { name: "Jessica", avatar: "👸", status: "BFF 4ever!" },
-        { name: "Mike", avatar: "🎸", status: "Band buddy" },
-        { name: "Emma", avatar: "🌟", status: "Party girl!" },
-        { name: "Jake", avatar: "😎", status: "Cool dude" },
-        { name: "Ashley", avatar: "💕", status: "Bestie" },
-        { name: "Ryan", avatar: "🎮", status: "Gamer bro" },
-        { name: "Chloe", avatar: "🦄", status: "Unicorn queen" },
-        { name: "Tyler", avatar: "🏀", status: "Sports guy" }
-      ],
-      mood: "🎵 jamming to my playlist",
-      location: "Cyber Space",
-      lastLogin: "Online now!"
+        { name: "Sarah", avatar: "💋", status: "online now ✨" },
+        { name: "Mike", avatar: "🏄‍♂️", status: "surfing 🌊" },
+        { name: "Jessica", avatar: "📚", status: "studying 📖" },
+        { name: "Tom", avatar: "🎮", status: "gaming 🎯" },
+        { name: "Lisa", avatar: "🎨", status: "creating art 🖌️" },
+        { name: "Jake", avatar: "⚽", status: "at practice ⚽" },
+        { name: "Emma", avatar: "🌸", status: "in the garden 🌻" },
+        { name: "Chris", avatar: "🎭", status: "rehearsing 🎪" }
+      ]
     },
     {
-      ...getDefaultProfile(),
-      name: "BlockMaster Alex",
-      avatar: "🧱",
-      bio: "Welcome to my pixel world! I love building, crafting, and creating. Every block tells a story! 🏗️⛏️",
+      name: "PixelMaster",
+      avatar: "⬛",
+      bio: "Welcome to my blocky world! I build amazing structures and explore infinite worlds. Join me on epic adventures! 🏗️⛏️",
       theme: "Minecraft Pixel",
-      backgroundColor: "#8B4513",
-      textColor: "#ffffff",
-      fontSize: "18",
-      fontFamily: "monospace",
-      musicLink: "https://youtube.com/watch?v=minecraft-music"
+      textColor: "#00ff00",
+      fontFamily: "Courier New",
+      fontSize: 14,
+      musicLink: "https://youtube.com"
     },
     {
-      ...getDefaultProfile(),
-      name: "Neon Dreams Luna",
-      avatar: "🌙",
-      bio: "Aesthetic vibes only! Lost in the synthwave and loving every pixel of it. Welcome to my digital dreamscape! 💜🌈",
+      name: "NeonDreamer",
+      avatar: "🌸",
+      bio: "Living in the aesthetic of tomorrow 🌈 Synthwave vibes and retro futures ✨ Welcome to my digital paradise! 💿🕶️",
       theme: "Vaporwave",
-      backgroundColor: "#ff00ff",
-      textColor: "#00ffff",
-      fontSize: "20",
-      fontFamily: '"Courier New", monospace',
-      musicLink: "https://soundcloud.com/synthwave-vibes"
+      textColor: "#ff00ff",
+      fontFamily: "Arial",
+      fontSize: 18,
+      musicLink: "https://soundcloud.com"
     }
   ];
 
@@ -68,57 +62,89 @@ const Auth = () => {
   const handlePrevDemo = () => {
     setCurrentDemoIndex((prev) => (prev - 1 + demoProfiles.length) % demoProfiles.length);
   };
-  const handleGoogleSignIn = async () => {
-    try {
-      await signInWithGoogle();
-    } catch (error) {
-      alert('Error signing in with Google: ' + error.message);
-    }
-  };
 
-  const handleGithubSignIn = async () => {
-    try {
-      await signInWithGithub();
-    } catch (error) {
-      alert('Error signing in with GitHub: ' + error.message);
-    }
-  };
+  if (loading) {
+    return (
+      <div className="auth-container">
+        <div className="loading">Loading...</div>
+      </div>
+    );
+  }
 
   if (showDemo) {
     return (
       <div className="demo-container">
         <div className="demo-header">
           <button 
+            onClick={() => setShowDemo(false)} 
             className="back-to-auth-btn"
-            onClick={() => setShowDemo(false)}
           >
             ← Back to Login
           </button>
-          <h2>Profile Demo - {demoProfiles[currentDemoIndex].theme}</h2>
+          <h2>Profile Demo</h2>
           <div className="demo-navigation">
-            <button className="demo-nav-btn" onClick={handlePrevDemo}>
-              ← Previous
-            </button>
+            <button onClick={handlePrevDemo} className="demo-nav-btn">← Previous</button>
             <span className="demo-counter">
               {currentDemoIndex + 1} of {demoProfiles.length}
             </span>
-            <button className="demo-nav-btn" onClick={handleNextDemo}>
-              Next →
-            </button>
+            <button onClick={handleNextDemo} className="demo-nav-btn">Next →</button>
           </div>
         </div>
-        <ProfilePreview 
-          profile={demoProfiles[currentDemoIndex]} 
-          isLivePreview={false}
-        />
-        <div className="demo-footer">
-          <p>This is what your profile could look like! Sign up to create your own.</p>
-          <button 
-            className="cta-button"
-            onClick={() => setShowDemo(false)}
-          >
-            🚀 Create My Profile
-          </button>
+        <div className="demo-content">
+          <ProfilePreview 
+            profile={demoProfiles[currentDemoIndex]} 
+            onBack={() => setShowDemo(false)}
+            isLivePreview={false}
+          />
+        </div>
+      </div>
+    );
+  }
+
+  if (!user) {
+    return (
+      <div className="auth-container">
+        <div className="auth-card">
+          <h1 className="app-title">🌟 MyCloudProfile</h1>
+          <p className="app-subtitle">Create your perfect digital persona</p>
+          
+          <div className="demo-section">
+            <h3>✨ See What's Possible</h3>
+            <p>Explore different themes and styles before you start!</p>
+            <button 
+              onClick={() => setShowDemo(true)}
+              className="demo-button"
+            >
+              🎭 View Demo Profiles
+            </button>
+          </div>
+
+          <div className="auth-divider">
+            <span>or sign in to create your own</span>
+          </div>
+
+          <div className="auth-buttons">
+            <button onClick={signInWithGoogle} className="auth-button google">
+              <span className="auth-icon">🔗</span>
+              Continue with Google
+            </button>
+            
+            <button onClick={signInWithGitHub} className="auth-button github">
+              <span className="auth-icon">🐙</span>
+              Continue with GitHub
+            </button>
+          </div>
+
+          <div className="features-list">
+            <h3>🚀 Features</h3>
+            <ul>
+              <li>🎨 Multiple themes (MySpace, Minecraft, Vaporwave)</li>
+              <li>🔗 Music integration</li>
+              <li>📱 Social sharing</li>
+              <li>☁️ Cloud sync</li>
+              <li>📁 Import/Export profiles</li>
+            </ul>
+          </div>
         </div>
       </div>
     );
@@ -126,67 +152,12 @@ const Auth = () => {
 
   return (
     <div className="auth-container">
-      <div className="auth-card">
-        <h1 className="auth-title">🌟 MyCloudProfile</h1>
-        <p className="auth-subtitle">
-          Create your unique profile in the cloud! 
-          Design, customize, and share your creative identity.
-        </p>
-        
-        <div className="auth-features">
-          <div className="feature">
-            <span className="feature-icon">🎨</span>
-            <span>Custom Themes</span>
-          </div>
-          <div className="feature">
-            <span className="feature-icon">🎵</span>
-            <span>Music Integration</span>
-          </div>
-          <div className="feature">
-            <span className="feature-icon">📱</span>
-            <span>Export & Share</span>
-          </div>
-          <div className="feature">
-            <span className="feature-icon">☁️</span>
-            <span>Cloud Saved</span>
-          </div>
-        </div>
-
-        <div className="auth-buttons">
-          <button 
-            className="auth-button google-button" 
-            onClick={handleGoogleSignIn}
-          >
-            <span className="button-icon">🔍</span>
-            Sign in with Google
-          </button>
-          
-          <button 
-            className="auth-button github-button" 
-            onClick={handleGithubSignIn}
-          >
-            <span className="button-icon">🐙</span>
-            Sign in with GitHub
-          </button>
-
-          <div className="divider">
-            <span>or</span>
-          </div>
-          
-          <button 
-            className="auth-button demo-button" 
-            onClick={() => setShowDemo(true)}
-          >
-            <span className="button-icon">👀</span>
-            Try Demo First
-          </button>
-        </div>
-
-        <div className="auth-footer">
-          <p>
-            Perfect for kids, creators, and anyone who loves to express their creativity!
-          </p>
-        </div>
+      <div className="user-info">
+        <img src={user.photoURL} alt="Profile" className="user-avatar" />
+        <h2>Welcome, {user.displayName}!</h2>
+        <button onClick={signOut} className="sign-out-button">
+          Sign Out
+        </button>
       </div>
     </div>
   );
